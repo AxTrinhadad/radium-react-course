@@ -4,12 +4,7 @@ import './Person.scss';
 import styles from './Demo.module.scss';
 
 const person = (props) => {
-    const rnd = Math.random();
 
-    if (rnd > 0.7) {
-        throw new Error('something wong');
-    }
-    
     return (
         
 
