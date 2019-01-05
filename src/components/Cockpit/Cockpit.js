@@ -1,14 +1,19 @@
 import React from 'react';
 
-import './Cockpit.css';
+import cockpitStyle from './Cockpit.module.css';
 import button from  './Button.module.css';
+
+import Aux from '../../hoc/Auxiliary'
 
 const cockpit = (props) => {
     const classes = [];
-    let btnClass = '';
+    let btnClass = cockpitStyle.Button;
     
+    console.log(props.showPersons);
+
     if (props.showPersons) {
-        btnClass = button.Red;
+        btnClass = [cockpitStyle.Button, button.Red].join(' ');
+        console.log(btnClass);
     }
 
     if (props.persons.length <= 2) {
@@ -21,7 +26,7 @@ const cockpit = (props) => {
 
 
     return (
-        <div className="Cockpit">
+        <>
             <h1>Hi, I'm a React App</h1> 
             <p className={classes.join(' ')}>This is hereeeeee!!!</p>
 
@@ -30,7 +35,7 @@ const cockpit = (props) => {
             onClick={props.click}
             >Toggle Persons</button>
 
-        </div>    
+        </>    
     );
 };
 

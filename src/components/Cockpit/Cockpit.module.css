@@ -6,7 +6,7 @@
     font-weight:  600;
 }
 
-:global .Cockpit button {
+.Button {
     border: 1px solid blue;
     padding: 16px;
     background-color: green;
@@ -14,7 +14,7 @@
     color: white;
 }
 
-:global .Cockpit button:hover {
+.Button:hover {
     background-color: lightgray;
     color: black;
 } 

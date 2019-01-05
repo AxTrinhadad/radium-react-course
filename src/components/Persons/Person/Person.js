@@ -1,20 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import './Person.scss';
 import styles from './Demo.module.scss';
 
-const person = (props) => {
+class Person extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-    return (
-        
+    componentWillMount() {
 
-        <div className="Person">
-            <p onClick={props.click}>I'm a {props.name} and I am {props.age} years old! </p>
-            {props.children}
-            <input type="text" onChange={props.changed} value={props.name} />
-            <p className={styles.Person}>I am testing demo here</p>
-        </div>    
-    )    
+    }
+
+    componentDidMount() {
+
+    }
+
+    render () {
+        return (
+            <div className="Person">
+                <p onClick={this.props.click}>I'm a {this.props.name} and I am {this.props.age} years old! </p>
+                {this.props.children}
+                <input type="text" onChange={this.props.changed} value={this.props.name} />
+                <p className={styles.Person}>I am testing demo here</p>
+            </div>    
+        ) 
+    }   
 }
 
-export default person;
+export default Person;

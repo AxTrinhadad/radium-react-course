@@ -4,6 +4,11 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] Inside Constructor', props);
+  }
+
   state = {
     persons: [
       { id: 1, name: 'Alex', age: 30 },
@@ -12,6 +17,19 @@ class App extends Component {
     ],
     showPersons: false
   }
+
+  componentWillMount() {
+    console.log('[App.js] Inside componentWIllMount')
+  }
+  
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] shouldComponentUpdate', nextProps, nextState);
+    //return true;
+    return nextState.persons !== this.state.persons ||
+      nextState.showPersons !== this.state.showPersons;
+  }
+
+  
 
   nameChangedHandler = (event, id) => {
 
@@ -61,8 +79,9 @@ class App extends Component {
 
     return (
       <div className="App">
+        <button onClick={() => {this.setState({showPersons: true})}}>Show Persons</button>
         <Cockpit
-          showPerson={this.state.showPersons}
+          showPersons={this.state.showPersons}
           persons={this.state.persons} 
           click={this.togglePersonsHandler} />
 
