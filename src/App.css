@@ -9,3 +9,16 @@
 .bold {
   font-weight:  600;
 }
+
+:global .App button {
+  border: 1px solid blue;
+  padding: 16px;
+  background-color: green;
+  font: inherit;
+  color: white;
+}
+
+:global .App button:hover {
+  background-color: lightgray;
+  color: black;
+} 
