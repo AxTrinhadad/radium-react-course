@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
-import Cockpit from '../components/Cockpit/Cockpit'
+import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
+
+export const AuthContext = React.createContext(false);
+
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +19,9 @@ class App extends Component {
       { id: 2, name: 'Jo', age: 28 },
       { id: 3, name: 'Lily', age : 12 }
     ],
-    showPersons: false
+    showPersons: false,
+    toggleClicked: 0,
+    authenticated: false,
   }
 
   componentWillMount() {
@@ -51,7 +57,12 @@ class App extends Component {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    this.setState( (prevState,props) => {
+      return {
+        showPersons: !doesShow,
+        toggleClicked: prevState.toggleClicked + 1
+      }
+    });
   }
 
   deletePersonHandler = (personIndex) => {
@@ -59,6 +70,10 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons.splice(personIndex,1);
     this.setState({persons: persons})
+  }
+
+  loginHandler = () => {
+      this.setState({authenticated: true});
   }
 
   render() {
@@ -70,7 +85,8 @@ class App extends Component {
           <Persons 
             persons={this.state.persons} 
             clicked={this.deletePersonHandler} 
-            changed={this.nameChangedHandler} />
+            changed={this.nameChangedHandler}
+             />
         </div> 
       );
       
@@ -78,20 +94,22 @@ class App extends Component {
 
 
     return (
-      <div className="App">
+      <>
         <button onClick={() => {this.setState({showPersons: true})}}>Show Persons</button>
         <Cockpit
           showPersons={this.state.showPersons}
           persons={this.state.persons} 
-          click={this.togglePersonsHandler} />
-
-        {persons}
+          click={this.togglePersonsHandler} 
+          login={this.loginHandler}/>
+          <AuthContext.Provider value={this.state.authenticated}>
+            {persons}
+          </AuthContext.Provider>
         
-      </div>
+      </>  
     );
 
     //return React.createElement('div',null, React.createElement('h1',{className: 'App'},'Hello!!!')); 
   }
 }
 
-export default App;
+export default WithClass(App, classes.App);

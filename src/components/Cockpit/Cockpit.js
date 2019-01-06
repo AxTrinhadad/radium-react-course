@@ -3,8 +3,6 @@ import React from 'react';
 import cockpitStyle from './Cockpit.module.css';
 import button from  './Button.module.css';
 
-import Aux from '../../hoc/Auxiliary'
-
 const cockpit = (props) => {
     const classes = [];
     let btnClass = cockpitStyle.Button;
@@ -34,6 +32,12 @@ const cockpit = (props) => {
             className={btnClass}
             onClick={props.click}
             >Toggle Persons</button>
+
+            <button
+                onClick={props.login}
+                >
+                Log in
+            </button>
 
         </>    
     );
